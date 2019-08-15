@@ -1,12 +1,14 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import Window from "./components/Window/Window";
+import Screens from "./components/Screens";
 
 function App() {
+  const [channelName] = React.useState("Flying Hawk");
+
   return (
-    <div className="App">
-      <Window />
+    <div className="app">
+      <h3 className="section">App</h3>
+      <h1>Channel: {channelName}</h1>
+      <Screens />
     </div>
   );
 }
