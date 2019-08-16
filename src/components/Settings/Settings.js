@@ -4,7 +4,7 @@ import Navbar from "./Navbar";
 import Content from "./Content";
 import Footer from "./Footer";
 
-function Settings(props) {
+function Settings({channelName, updateChannelName, user}) {
   return (
     <div
       className="settings"
@@ -14,11 +14,11 @@ function Settings(props) {
       }}
     >
       <h3 className="section">Settings</h3>
-      <Navbar />
-      <div style={{ flex: "1", height: "100%" }}>
-        <Content />
+      <Navbar channelName={channelName} user={user} />
+      <div style={{height: "100%" }}>
+        <Content channelName={channelName} updateChannelName={updateChannelName} />
       </div>
-      <Footer />
+      <Footer channelName={channelName} user={user} />
     </div>
   );
 }

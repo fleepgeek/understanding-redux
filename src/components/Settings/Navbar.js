@@ -1,10 +1,10 @@
 import React from "react";
 
-function Navbar(props) {
+function Navbar({channelName, user}) {
   return (
     <div style={{ display: "flex", justifyContent: "space-between", backgroundColor: "#dfdfdf" }}>
-      <h2>(channel name)</h2>
-      {props.user && <p>Welcome {props.user.name}</p>}
+      <h2>{channelName}</h2>
+      {user && <p>Welcome {user.name}</p>}
     </div>
   );
 }
