@@ -1,17 +1,14 @@
-import React from "react"
+import React from "react";
 
 import Settings from "./Settings/Settings";
 
-function Screens({channelName, updateChannelName, user}) {
+function Screens() {
   return (
     <div className="screens">
       <h3 className="section">Screens</h3>
-      <Settings 
-        channelName={channelName} 
-        updateChannelName={updateChannelName}
-        user={user} />
+      <Settings />
     </div>
-  )
+  );
 }
 
 export default Screens;

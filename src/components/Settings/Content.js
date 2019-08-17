@@ -1,6 +1,6 @@
 import React from "react";
 
-function Content({channelName, updateChannelName}) {
+function Content({ channelName, updateChannelName }) {
   return (
     <div style={{ display: "flex", height: "200px" }}>
       <Sidebar />
@@ -9,16 +9,21 @@ function Content({channelName, updateChannelName}) {
   );
 }
 
-function Main({channelName, updateChannelName}) {
+function Main({ channelName, updateChannelName }) {
+  const [name, setName] = React.useState(channelName);
   return (
     <div style={{ backgroundColor: "#fff", flex: "1", padding: "10px" }}>
       <label htmlFor="channelName">Change Channel Name: </label>
-      <input 
-        type="text" 
-        name="channelName" 
-        id="channelName" 
-        value={channelName}
-        onChange={(e) => updateChannelName(e.target.value)} />
+      <input
+        type="text"
+        name="channelName"
+        id="channelName"
+        value={name}
+        onChange={e => setName(e.target.value)}
+      />
+      <button onClick={e => updateChannelName(name)}>
+        Update Channel Name
+      </button>
     </div>
   );
 }
@@ -30,6 +35,5 @@ function Sidebar() {
     </div>
   );
 }
-
 
 export default Content;
