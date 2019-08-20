@@ -1,4 +1,4 @@
-const initialState = { channelName: "Flying Hawk", user: { name: "john" } };
+const initialState = { channelName: "Flying Hawk", user: null, error: null };
 
 /*
     An action is an information you send to the reducer.
@@ -13,11 +13,24 @@ const initialState = { channelName: "Flying Hawk", user: { name: "john" } };
     4) The components connected to the store are updated
 */
 
+/*
+  Pure Function
+  1) Must return the same output on the same input
+  2) Must not have side effects (network call, write to file, logging to screen)
+  3) Should not mutate external state
+*/
+
 const reducer = (state = initialState, action) => {
-  if (action.type === "UPDATE_CHANNEL_NAME") {
-    return { ...state, channelName: action.payload.channelName };
+  switch (action.type) {
+    case "UPDATE_CHANNEL_NAME":
+      return { ...state, channelName: action.payload.channelName };
+    case "FETCH_USER_SUCCESS":
+      return { ...state, user: action.payload.user };
+    case "FETCH_USER_FAILED":
+      return { ...state, error: action.payload.error };
+    default:
+      return state;
   }
-  return state;
 };
 
 export default reducer;

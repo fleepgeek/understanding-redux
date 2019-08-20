@@ -5,7 +5,11 @@ import Navbar from "./Navbar";
 import Content from "./Content";
 import Footer from "./Footer";
 
-function Settings({ channelName, updateChannelName, user }) {
+function Settings({ channelName, updateChannelName, user, fetchUser }) {
+  React.useEffect(() => {
+    fetchUser();
+  }, [fetchUser]);
+
   return (
     <div
       className="settings"
@@ -29,7 +33,8 @@ function Settings({ channelName, updateChannelName, user }) {
 
 const mapStateToProps = state => {
   return {
-    channelName: state.channelName
+    channelName: state.channelName,
+    user: state.user
   };
 };
 
@@ -38,7 +43,8 @@ const mapDispatchToProps = dispatch => ({
     dispatch({
       type: "UPDATE_CHANNEL_NAME",
       payload: { channelName: value }
-    })
+    }),
+  fetchUser: () => dispatch({ type: "FETCH_USER" })
 });
 
 export default connect(
