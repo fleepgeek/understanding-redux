@@ -1,8 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
-import Screens from "./components/Screens";
 
-function App({ channelName }) {
+import Screens from "./components/Screens";
+import { fetchUser } from "./state/user/actions";
+
+function App({ channelName, onFetchUser }) {
+  React.useEffect(() => {
+    onFetchUser();
+  }, [onFetchUser]);
+
   return (
     <div className="app">
       <h3 className="section">App</h3>
@@ -14,8 +20,16 @@ function App({ channelName }) {
 
 const mapStateToProps = state => {
   return {
-    channelName: state.channelName
+    channelName: state.channel.channelName
   };
 };
 
-export default connect(mapStateToProps)(App);
+/*
+  If you wont be making use of any state in a component,
+  pass null as the first argument if you need mapDispatchToProps:
+  connect(null, mapDispatchToProps)
+*/
+export default connect(
+  mapStateToProps,
+  { onFetchUser: fetchUser }
+)(App);

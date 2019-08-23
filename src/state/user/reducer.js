@@ -1,4 +1,6 @@
-const initialState = { channelName: "Flying Hawk", user: null, error: null };
+import * as actionTypes from "./actionTypes";
+
+const initialState = { user: null, error: null };
 
 /*
     An action is an information you send to the reducer.
@@ -22,11 +24,9 @@ const initialState = { channelName: "Flying Hawk", user: null, error: null };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case "UPDATE_CHANNEL_NAME":
-      return { ...state, channelName: action.payload.channelName };
-    case "FETCH_USER_SUCCESS":
+    case actionTypes.FETCH_USER_SUCCESS:
       return { ...state, user: action.payload.user };
-    case "FETCH_USER_FAILED":
+    case actionTypes.FETCH_USER_FAILED:
       return { ...state, error: action.payload.error };
     default:
       return state;

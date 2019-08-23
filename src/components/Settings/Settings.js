@@ -4,12 +4,9 @@ import { connect } from "react-redux";
 import Navbar from "./Navbar";
 import Content from "./Content";
 import Footer from "./Footer";
+import { updateChannelName } from "../../state/channel/actions";
 
-function Settings({ channelName, updateChannelName, user, fetchUser }) {
-  React.useEffect(() => {
-    fetchUser();
-  }, [fetchUser]);
-
+function Settings({ channelName, onUpdateChannelName, user, onFetchUser }) {
   return (
     <div
       className="settings"
@@ -23,7 +20,7 @@ function Settings({ channelName, updateChannelName, user, fetchUser }) {
       <div style={{ height: "100%" }}>
         <Content
           channelName={channelName}
-          updateChannelName={updateChannelName}
+          updateChannelName={onUpdateChannelName}
         />
       </div>
       <Footer channelName={channelName} user={user} />
@@ -33,21 +30,23 @@ function Settings({ channelName, updateChannelName, user, fetchUser }) {
 
 const mapStateToProps = state => {
   return {
-    channelName: state.channelName,
-    user: state.user
+    channelName: state.channel.channelName,
+    user: state.user.user
   };
 };
 
-const mapDispatchToProps = dispatch => ({
-  updateChannelName: value =>
-    dispatch({
-      type: "UPDATE_CHANNEL_NAME",
-      payload: { channelName: value }
-    }),
-  fetchUser: () => dispatch({ type: "FETCH_USER" })
-});
+// const mapDispatchToProps = dispatch => ({
+//   updateChannelName: value =>
+//     dispatch({
+//       type: "UPDATE_CHANNEL_NAME",
+//       payload: { channelName: value }
+//     }),
+//   fetchUser: () => dispatch({ type: "FETCH_USER" })
+// });
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  {
+    onUpdateChannelName: updateChannelName
+  }
 )(Settings);

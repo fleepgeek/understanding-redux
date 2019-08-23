@@ -1,6 +1,9 @@
 import { put, takeLatest, call } from "redux-saga/effects";
 import axios from "axios";
 
+import * as actionTypes from "./actionTypes";
+import { fetchUserSuccess, fetchUserFailed } from "./actions";
+
 // Worker Saga
 function* fetchUserSaga() {
   try {
@@ -10,15 +13,15 @@ function* fetchUserSaga() {
       axios.get,
       "https://jsonplaceholder.typicode.com/users/1"
     );
-    yield put({ type: "FETCH_USER_SUCCESS", payload: { user: res.data } });
+    yield put(fetchUserSuccess(res.data));
   } catch (error) {
-    yield put({ type: "FETCH_USER_FAILED", payload: { error } });
+    yield put(fetchUserFailed(error));
   }
 }
 
 // Watcher Saga
 function* watchUserSaga() {
-  yield takeLatest("FETCH_USER", fetchUserSaga);
+  yield takeLatest(actionTypes.FETCH_USER, fetchUserSaga);
   // yield takeEvery("FETCH_USER", fetcUserSaga);
 }
 
